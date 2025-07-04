@@ -1,0 +1,42 @@
+name: Sync with Upstream
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # 每12小时同步一次
+  workflow_dispatch: # 允许手动触发同步
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出你的代码仓库
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 拉取所有的历史记录
+
+      # 配置 Git 用户
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # 获取原作者仓库更新
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/Aethersailor/Custom_OpenClash_Rules.git
+          git fetch upstream
+
+      # 合并原作者的更新
+      - name: Merge upstream changes
+        run: |
+          git checkout main  # 确保在主分支
+          git merge upstream/main --no-edit || echo "No changes to merge"
+
+      # 提交并推送到你的仓库
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "Sync with upstream"
+          git push
