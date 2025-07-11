@@ -2,7 +2,7 @@ name: Sync and Check Diff from Upstream
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # 每天北京时间上午10点运行
+    - cron: '0 2 * * *'  # 每天北京时间上午10点
   workflow_dispatch:
 
 jobs:
@@ -15,10 +15,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
+      - name: Set up Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Add upstream and fetch
         run: |
@@ -28,9 +28,9 @@ jobs:
       - name: Merge upstream changes
         run: |
           git checkout main
-          git merge upstream/main --allow-unrelated-histories -m "Sync from upstream"
+          git merge upstream/main --allow-unrelated-histories -m "🔄 Sync from upstream"
 
-      - name: Compare custom rule files
+      - name: Compare custom files
         id: check_diff
         run: |
           mkdir -p diff_output
@@ -38,51 +38,42 @@ jobs:
           diff cfg/Custom_Clash_Smart_Full.ini Custom_Clash_Smart_Full_self.ini > diff_output/smart.diff || true
 
           if [ -s diff_output/full.diff ] || [ -s diff_output/smart.diff ]; then
-            echo "diff_found=true" >> $GITHUB_ENV
+            echo "true" > diff_output/diff_flag.txt
           else
-            echo "diff_found=false" >> $GITHUB_ENV
+            echo "false" > diff_output/diff_flag.txt
           fi
 
-      - name: Push merged changes
+      - name: Push changes if any
         run: git push origin main
 
-      - name: Create Issue if diff found
-        if: env.diff_found == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const fullDiff = fs.existsSync('diff_output/full.diff') ? fs.readFileSync('diff_output/full.diff', 'utf8') : '无差异';
-            const smartDiff = fs.existsSync('diff_output/smart.diff') ? fs.readFileSync('diff_output/smart.diff', 'utf8') : '无差异';
-            const title = "🔔 检测到规则文件更新差异";
-            const body = `
-发现上游更新与你的自定义规则存在差异，请手动检查并更新：
+      - name: Create issue if differences exist
+        if: success()
+        run: |
+          if grep -q "true" diff_output/diff_flag.txt; then
+            echo "Creating issue for differences..."
+
+            # Truncate diff if too long
+            FULL_DIFF=$(head -c 3000 diff_output/full.diff || echo "无差异")
+            SMART_DIFF=$(head -c 3000 diff_output/smart.diff || echo "无差异")
+
+            ISSUE_BODY="发现上游更新与你的自定义规则存在差异，请手动检查并更新：
 
 ## 差异：Custom_Clash_Full.ini vs Custom_Clash_Full_self.ini
 \`\`\`diff
-${fullDiff.slice(0, 3000)}
+$FULL_DIFF
 \`\`\`
 
 ## 差异：Custom_Clash_Smart_Full.ini vs Custom_Clash_Smart_Full_self.ini
 \`\`\`diff
-${smartDiff.slice(0, 3000)}
+$SMART_DIFF
 \`\`\`
 
-👉 请根据差异手动更新 *_self.ini 文件以保持同步。
-`;
+👉 请手动更新 *_self.ini 文件以保持同步。"
 
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open'
-            });
-
-            const existing = issues.find(issue => issue.title === title);
-            if (!existing) {
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title,
-                body
-              });
-            }
+            gh issue list --state open --json title | grep "检测到规则文件更新差异" || \
+            gh issue create --title "🔔 检测到规则文件更新差异" --body "$ISSUE_BODY"
+          else
+            echo "No differences found, skipping issue creation."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
