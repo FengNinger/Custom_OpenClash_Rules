@@ -50,7 +50,7 @@ jobs:
         run: git push origin main || true
 
       - name: Create Issue if differences found
-        if: ${{ env.DIFF == 'true' }}
+        if: env.DIFF == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -59,20 +59,20 @@ jobs:
             const smartDiff = fs.readFileSync('diff_output/smart.diff', 'utf8').slice(0, 3000) || '无差异';
             const title = "🔔 检测到规则文件更新差异";
             const body = `
-发现上游更新与你的自定义规则存在差异，请手动检查并更新：
+            发现上游更新与你的自定义规则存在差异，请手动检查并更新：
 
-## Custom_Clash_Full.ini vs Custom_Clash_Full_self.ini
-\`\`\`diff
-${fullDiff}
-\`\`\`
+            ## Custom_Clash_Full.ini vs Custom_Clash_Full_self.ini
+            \`\`\`diff
+            ${fullDiff}
+            \`\`\`
 
-## Custom_Clash_Smart_Full.ini vs Custom_Clash_Smart_Full_self.ini
-\`\`\`diff
-${smartDiff}
-\`\`\`
+            ## Custom_Clash_Smart_Full.ini vs Custom_Clash_Smart_Full_self.ini
+            \`\`\`diff
+            ${smartDiff}
+            \`\`\`
 
-👉 请手动同步 *_self.ini 文件。
-`;
+            👉 请手动同步 *_self.ini 文件。
+            `;
 
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
