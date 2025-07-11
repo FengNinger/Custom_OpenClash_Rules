@@ -31,24 +31,23 @@ jobs:
           git merge upstream/main --allow-unrelated-histories -m "Sync from upstream"
 
       - name: Compare custom rule files
-        id: diff_check
+        id: check_diff
         run: |
           mkdir -p diff_output
           diff cfg/Custom_Clash_Full.ini Custom_Clash_Full_self.ini > diff_output/full.diff || true
           diff cfg/Custom_Clash_Smart_Full.ini Custom_Clash_Smart_Full_self.ini > diff_output/smart.diff || true
 
           if [ -s diff_output/full.diff ] || [ -s diff_output/smart.diff ]; then
-            echo "has_diff=true" >> "$GITHUB_OUTPUT"
+            echo "diff_found=true" >> $GITHUB_ENV
           else
-            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+            echo "diff_found=false" >> $GITHUB_ENV
           fi
 
-      - name: Commit and push if merged
-        run: |
-          git push origin main
+      - name: Push merged changes
+        run: git push origin main
 
-      - name: Create issue if diff exists
-        if: steps.diff_check.outputs.has_diff == 'true'
+      - name: Create Issue if diff found
+        if: env.diff_found == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -69,16 +68,17 @@ ${fullDiff.slice(0, 3000)}
 ${smartDiff.slice(0, 3000)}
 \`\`\`
 
-👉 建议你手动同步调整 *_self.ini 文件。
+👉 请根据差异手动更新 *_self.ini 文件以保持同步。
 `;
-            const issues = await github.rest.issues.listForRepo({
+
+            const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              state: "open"
+              state: 'open'
             });
 
-            const exists = issues.data.find(issue => issue.title === title);
-            if (!exists) {
+            const existing = issues.find(issue => issue.title === title);
+            if (!existing) {
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
