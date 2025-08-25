@@ -813,6 +813,7 @@ rules:
 - GEOIP,private,🎯 全球直连,no-resolve
 - RULE-SET,Custom_Direct_Classical,🎯 全球直连
 - RULE-SET,Custom_Proxy_Classical,🚀 手动选择
+- RULE-SET,MyRules,🎯 全球直连
 - GEOSITE,google-cn,🎯 全球直连
 - GEOSITE,category-games@cn,🎯 全球直连
 - RULE-SET,Steam_CDN_Classical,🎯 全球直连
@@ -828,6 +829,8 @@ rules:
 - GEOSITE,github,🚀 GitHub
 - GEOSITE,category-speedtest,🚀 测速工具
 - GEOSITE,steam,🎮 Steam
+- RULE-SET,MyRules,🎮 游戏平台
+- GEOSITE,category-games,🎮 游戏平台
 - GEOSITE,youtube,📹 YouTube
 - GEOSITE,apple-tvplus,🎥 AppleTV+
 - GEOSITE,apple,🍎 苹果服务
@@ -839,10 +842,10 @@ rules:
 - GEOSITE,disney,🎥 DisneyPlus
 - GEOSITE,hbo,🎥 HBO
 - GEOSITE,primevideo,🎥 PrimeVideo
+- RULE-SET,MyRules,🎥 Emby
 - GEOSITE,category-emby,🎥 Emby
 - GEOSITE,spotify,🎻 Spotify
 - GEOSITE,bahamut,📺 Bahamut
-- GEOSITE,category-games,🎮 游戏平台
 - GEOSITE,category-entertainment,🌎 国外媒体
 - GEOSITE,category-pt,⏬ PT站点
 - GEOSITE,paypal,💳 PayPal
