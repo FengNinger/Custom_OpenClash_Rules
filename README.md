@@ -28,7 +28,17 @@
 - [📝 许可](#-许可)
 
 ---
+* Custom_Clash_Full.ini  
+```
+重度分流规则模板，任何人都可以向该规则内添加你认为可以用的到的规则或节点分组，可以通过 PR/issue/Telegram 群组 向维护者提出增加规则的请求。
+该规则模板仅追求规则覆盖面，不做任何性能上的考量。  
+无 DNS 泄露，可通过泄露检测网站的测试。  
+```
+```
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Full.ini
+```
 
+***
 ## 📖 关于本项目
 
 > ⭐ **本项目可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！**
