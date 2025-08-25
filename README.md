@@ -28,6 +28,9 @@
 - [📝 许可](#-许可)
 
 ---
+```
+以下为ini远程订阅文件
+```
 * Custom_Clash_Smart_Full_self.ini
 
 ```
@@ -39,6 +42,23 @@ https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_
 
 ```
 https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_Clash_Full_self.ini
+```
+
+***
+```
+以下为yaml远程配置文件
+```
+* Custom_Clash_self.yaml
+
+```
+https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_Clash_self.yaml
+```
+
+***
+* Custom_Overwrite_self.yaml
+
+```
+https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_Overwrite_self.yaml
 ```
 
 ***
