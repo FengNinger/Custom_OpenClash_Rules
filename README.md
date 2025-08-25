@@ -55,10 +55,10 @@ https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_
 ```
 
 ***
-* Custom_Overwrite_self.yaml
+* Custom_Overwrite_self.conf
 
 ```
-https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_Overwrite_self.yaml
+https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/Custom_Overwrite_self.conf
 ```
 
 ***
