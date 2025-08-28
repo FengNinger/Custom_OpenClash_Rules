@@ -809,6 +809,8 @@ proxy-groups:
   proxies:
   - 🐟 漏网之鱼
 rules:
+- RULE-SET,my-self-rules
+
 - GEOSITE,private,🎯 全球直连
 - GEOIP,private,🎯 全球直连,no-resolve
 - RULE-SET,Custom_Direct_Classical,🎯 全球直连
@@ -906,9 +908,9 @@ rule-providers:
     url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Classical.yaml
     path: ./ruleset/Steam_CDN_Classical.yaml
     interval: 28800
-  MyRules:
+  my-self-rules:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/my-openclash-rules.yaml"
-    path: ./ruleset/MyRules.yaml
+    url: https://raw.githubusercontent.com/FengNinger/Custom_OpenClash_Rules/main/my-openclash-rules.yaml
+    path: ./ruleset/my-self-rules.yaml
     interval: 28800
