@@ -1,9 +1,11 @@
+payload:
 #直连规则
 - IP-CIDR,43.156.32.170/32,DIRECT,no-resolve
 - IP-CIDR,43.156.40.51/32,DIRECT,no-resolve
 - IP-CIDR,8.215.78.75/32,DIRECT,no-resolve
 - IP-CIDR,152.53.165.218/32,DIRECT,no-resolve
 - IP-CIDR,129.226.209.96/32,DIRECT,no-resolve
+
 - DOMAIN-KEYWORD,ghfast,DIRECT
 - DOMAIN-KEYWORD,miband,DIRECT
 - DOMAIN-KEYWORD,bochk,DIRECT
@@ -18,30 +20,39 @@
 - DOMAIN-SUFFIX,cdn.wlcdn88.com,DIRECT
 - DOMAIN-SUFFIX,vodcnd10.rsfcxq.com,DIRECT
 - DOMAIN-SUFFIX,v.cdnlz22.com,DIRECT
+
 - DOMAIN-SUFFIX,m.douban.cmliussss.com,DIRECT
 - DOMAIN-SUFFIX,img.doubanio.cmliussss.com,DIRECT
+
 #谷歌服务
 - DOMAIN-KEYWORD,ngstr,🇬 谷歌服务
+
 #Emby
 - IP-CIDR,65.21.224.76/32,🎥 Emby,no-resolve
 - IP-CIDR,65.21.206.96/32,🎥 Emby,no-resolve
 - IP-CIDR,152.53.64.227/32,🎥 Emby,no-resolve
+
 - DOMAIN-SUFFIX,digimon.ink,DIRECT
 - DOMAIN-SUFFIX,emby2.mjji.de,DIRECT
 - DOMAIN-SUFFIX,public.shrekmedia.org,DIRECT
+
 - DOMAIN-SUFFIX,mjji.de,🎥 Emby
 - DOMAIN-SUFFIX,hongxingyunmovie.vip,🎥 Emby
 - DOMAIN-SUFFIX,fworks-emby.webn.cc,🎥 Emby
 - DOMAIN-SUFFIX,media.nijigem.by,🎥 Emby
 - DOMAIN-SUFFIX,bava.mebimmer.de,🎥 Emby
+
 - DOMAIN-KEYWORD,bangumi.ca,DIRECT
 - DOMAIN-KEYWORD,bgp.yt,DIRECT
 - DOMAIN-KEYWORD,v50.su,DIRECT
+
 - DOMAIN-KEYWORD,yunti.online,🎥 Emby
 - DOMAIN-KEYWORD,emby,🎥 Emby
+
 - DST-PORT,8096,🎥 Emby
 
 #游戏平台
+- AND,((NETWORK,UDP),(DST-PORT,20000-60000)),🎮 游戏平台
 #- DOMAIN-KEYWORD,steam,🎮 Steam
 - DOMAIN-KEYWORD,ubisoft,🎮 游戏平台
 - DOMAIN-KEYWORD,battleye,🎮 游戏平台
