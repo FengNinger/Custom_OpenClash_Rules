@@ -114,7 +114,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ## 📝 本项目设置方案及订阅转换模板介绍
 
-本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来。
+本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来，分流数据基于 GeoSite。
 
 **按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅的使用你的 OpenClash：**
 
@@ -219,6 +219,8 @@ https://api.asailor.org/sub
 
 填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。
 
+> 本项目后端服务使用 [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter) 进行部署。
+
 ---
 
 ### ❓ 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
@@ -260,8 +262,12 @@ https://api.asailor.org/sub
 - 🆓 支持试用
 - 💬 工单支持简体中文沟通且客服反应迅速
 
-注册链接：[SSRDOG 注册](https://st1.hosbb.com/#/register?code=FnSb4oWM)  (链接包含 aff 信息，感谢支持！)
-
+注册链接：[SSRDOG 注册](https://st1.hosbb.com/#/register?code=FnSb4oWM)  (链接包含 aff 代码，感谢支持！介意 aff 可自行去除代码)
+```
+优惠码：Custom_OpenClash_Rules
+使用范畴：轻度，标准，企业（月，季，半年，1年）
+使用须知：每帐号仅1次使用机会
+```
 本项目订阅模板的节点地区分类即参考了该机场的节点地区进行分类。
 
 ⚠️ **仅作推荐，维护者和推荐机场无任何关系，不对机场服务质量进行任何担保。**
@@ -316,6 +322,9 @@ Traffic、GB、Expire
 
 ### ⚡ 加速规则
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
+
+### 🔄 订阅转换后端
+- [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter)
 
 ### 🔖 其他
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
