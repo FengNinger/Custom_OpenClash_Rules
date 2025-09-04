@@ -2,15 +2,11 @@ payload:
 # 地区检测
  - DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
 
-# 端口代理
- - AND,((GEOIP,US),(AND,((PROTOCOL,UDP),(OR,((DEST-PORT,500),(DEST-PORT,4500))))))
-
 # 美国 SIM 卡 Wi-Fi Calling 配置规则
  - DOMAIN-SUFFIX,crl.t-mobile.com
  - DOMAIN-SUFFIX,depdg.epc.mnc260.mcc310.pub.3gppnetwork.org
  - DOMAIN-SUFFIX,eas3.msg.t-mobile.com
  - DOMAIN-SUFFIX,epdg.epc.mnc240.mcc310.pub.3gppnetwork.org
-#DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
  - DOMAIN-SUFFIX,mascns.t-mobile.com
  - DOMAIN-SUFFIX,ns.sipgeo.t-mobile.com
  - DOMAIN-SUFFIX,optimizely.com
@@ -24,7 +20,6 @@ payload:
  - IP-CIDR,66.94.0.0/19,no-resolve
 
 # 英国 SIM 卡 Wi-Fi Calling 配置规则
-
 # 沃达丰
 - DOMAIN-SUFFIX,epdg.epc.mnc015.mcc234.pub.3gppnetwork.org
 - DOMAIN-SUFFIX,ss.epdg.epc.mnc015.mcc234.pub.3gppnetwork.org
